@@ -15,7 +15,7 @@ timer = pygame.time.Clock()
 welcome_font = pygame.font.Font("freesansbold.ttf", 64)
 font = pygame.font.Font("freesansbold.ttf", 44)
 small_font = pygame.font.Font("freesansbold.ttf", 24)
-mixer.music.load("father_gascoigne.wav")
+mixer.music.load("jazz.wav")
 mixer.music.play(-1)
 # Game variables
 start = False
@@ -83,6 +83,10 @@ def draw_buttons(start, records, result) -> list:
 
 # Deals a new card from the deck to your current hand
 def deal_card(current_hand, game_deck) -> list:
+    if len(game_deck) == 0:
+        print("I'm empty, time to reshuffle!")
+        game_deck = 4*DECK
+        random.shuffle(game_deck)
     current_hand.append(game_deck.pop())
     return current_hand
 
@@ -187,7 +191,7 @@ if __name__ == "__main__":
         timer.tick(FPS)
         screen.fill("black")
         if len(BJ_DECK) == 0:
-            print("I'm empty! Time to reshuffle")
+            #print("I'm empty! Time to reshuffle")
             BJ_DECK = 4*DECK
             random.shuffle(BJ_DECK)
         # If new game is started, then deal initial cards
